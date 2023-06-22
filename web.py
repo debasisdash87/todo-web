@@ -7,10 +7,13 @@ todos = functions.get_todos()
 
 def add_todo():
     todo = st.session_state['new_todo'] + "\n"
-    todos.append(todo)
-    todos.sort()
-    functions.write_todos(todos)
-    st.session_state['new_todo'] = ""
+    if todo in todos:
+        st.error("Duplicate entry")
+    else:
+        todos.append(todo)
+        todos.sort()
+        functions.write_todos(todos)
+        st.session_state['new_todo'] = ""
 
 
 st.title("My Todo App")
